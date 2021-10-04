@@ -93,7 +93,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-	// TODO: pop up alert message
+	alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -109,7 +109,6 @@ function handleClick(evt) {
 	}
 
 	// place piece in board and add to HTML table
-	// TODO: add line to update in-memory board
 	placeInTable(y, x);
 
 	// check for win
@@ -117,20 +116,16 @@ function handleClick(evt) {
 		return endGame(`Player ${currPlayer} won!`);
 	}
 
-	// check for tie
-	function checkForTie(array) {
-		return array !== undefined
-	}
+	// check for tie	
 	 if(board.every(checkForTie)) {
 		return endGame('Tie Game!');
 	 }
 
 	
 	// TODO: check if all cells in board are filled; if so call, call endGame
-	// let tableLocations = document.getElementsByTagName('td').value;
-	// if (tableLocations !== undefined) {
-	//   endGame('Tied Game!');
-	// }
+	function checkForTie(array) {
+		return array === undefined
+	}
 
 	// switch players
 	if (currPlayer === 1) {
