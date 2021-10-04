@@ -11,6 +11,11 @@ let HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
+// Button to restart game
+document.querySelector('#restartButton').addEventListener('click', function () {
+	location.reload();
+});
+
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -72,17 +77,20 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
 	for (let y = HEIGHT -1; y >= 0; y--) {
-		if (board[y][x] === undefined) {
+		console.log('1:', y);
+		console.log('2: ', board[y][x])
+		if (board[y][x] === 'undefined') {
 			return y;
 		}
 	}
+	return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
 	// Make a div and insert into correct table cell
-	const gamePieceLocationDiv = document.createElement("div");
+	let gamePieceLocationDiv = document.createElement("div");
 	gamePieceLocationDiv.classList.add(
 		"piece",
 		"animated",
@@ -112,22 +120,35 @@ function handleClick(evt) {
 	}
 
 	// place piece in board and add to HTML table
+	board[y][x] = currPlayer;
 	placeInTable(y, x);
 
 	// check for win
 	if (checkForWin()) {
-		return endGame(`Player ${currPlayer} won!`);
+			return endGame(`Player ${currPlayer} won!`);
 	}
 
-	// check for tie	
-	 if(board.every(checkForTie)) {
-		return endGame('Tie Game!');
-	 }
+	//check for tie	
+	if (checkForTie()) { 
+			endGame(`Tie`);
+		}
 
 	
-	// TODO: check if all cells in board are filled; if so call, call endGame
-	function checkForTie(array) {
-		return array === undefined
+	// Check if all cells in board are filled; if so call, call endGame
+	function checkForTie(){
+		// Loops through the row
+		for (let y = 0; y < board.length; y++) {
+			// Loops through the column
+			for (let x = 0; x < board[y].length; x++) {
+				// Checks to see if the row/column value is undefined
+				if (board[y][x] === 'undefined'){
+					// If you find a false, exit the function, because the game is not a tie, and the game will continue
+					return false;
+				}
+			}		
+		}
+		// end game, because the game is a tie
+		return true;
 	}
 
 	// switch players

@@ -1,3 +1,53 @@
+body {
+	background-color: black;
+}
+
+h1 {
+	color: rgb(253, 246, 246);
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 0;
+}
+
+div.button {
+  text-align: center;
+}
+
+.btn {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  border-radius: 0.6em;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 100;
+  line-height: 1;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  padding: 5.2px 6.8px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
+}
+.btn:hover, .btn:focus {
+  color: #fff;
+  outline: 0;
+}
+
+.first {
+  -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.first:hover {
+  box-shadow: 0 0 40px 40px #e74c3c inset;
+}
+
 /* game board table */
 
 #board td {
@@ -33,4 +83,57 @@
 
 #column-top td:hover {
 	background-color: gold;
+}
+
+table.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.animated {
+	background-repeat: no-repeat;
+	background-position: left top;
+	-webkit-animation-duration: 4s;
+	animation-duration: 4s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+@-webkit-keyframes bounceIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.3);
+	}
+	50% {
+		opacity: 1;
+		-webkit-transform: scale(1.05);
+	}
+	70% {
+		-webkit-transform: scale(0.9);
+	}
+	70% {
+		-webkit-transform: scale(1);
+	}
+}
+
+@keyframes bounceIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.3);
+	}
+	30% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+	30% {
+		transform: scale(0.9);
+	}
+	30% {
+		transform: scale(1);
+	}
+}
+
+.bounceIn {
+	-webkit-animation-name: bounceIn;
+	animation-name: bounceIn;
 }
