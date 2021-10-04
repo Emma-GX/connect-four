@@ -78,7 +78,11 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  // Make a div and insert into correct table cell
+  const gamePieceLocationDiv = document.createElement('div');
+  gamePieceLocationDiv.classList.add('piece','animated','bounceIn', `player${currPlayer}`);
+
+  document.getElementById(`${y}-${x}`).append(gamePieceLocationDiv);
 }
 
 /** endGame: announce game end */
