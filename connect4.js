@@ -5,8 +5,8 @@
  * board fills (tie)
  */
 
-let WIDTH = 7;
-let HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
@@ -22,6 +22,7 @@ document.querySelector('#restartButton').addEventListener('click', function () {
 
 function makeBoard(y, x) {
 	// Set "board" to empty HEIGHT x WIDTH matrix array
+	// Two dimensional array to set up the board
 	for (let y = 0; y < HEIGHT; y++) {
 		board.push(new Array());
 		for (let x = 0; x < WIDTH; x++) {
@@ -178,34 +179,39 @@ function checkForWin() {
 	}
 
 	// TODO: read and understand this code. Add comments to help you.
-
+	// Loops through the Height
 	for (let y = 0; y < HEIGHT; y++) {
+		// Loops throught the Width
 		for (let x = 0; x < WIDTH; x++) {
+			// Check for horizontal 4 in a row
 			const horiz = [
 				[y, x],
 				[y, x + 1],
 				[y, x + 2],
 				[y, x + 3],
 			];
+			// Check for vertical 4 in a row
 			const vert = [
 				[y, x],
 				[y + 1, x],
 				[y + 2, x],
 				[y + 3, x],
 			];
+			// Check for diagonal right 4 in a row
 			const diagDR = [
 				[y, x],
 				[y + 1, x + 1],
 				[y + 2, x + 2],
 				[y + 3, x + 3],
 			];
+			// Check for diagonal left 4 in a row
 			const diagDL = [
 				[y, x],
 				[y + 1, x - 1],
 				[y + 2, x - 2],
 				[y + 3, x - 3],
 			];
-
+			// If there is four in a row return true
 			if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
 				return true;
 			}
