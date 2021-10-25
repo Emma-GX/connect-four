@@ -11,6 +11,8 @@ const HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
+let gameIsRunning = true;
+
 // Button to restart game
 document.querySelector('#restartButton').addEventListener('click', function () {
 	location.reload();
@@ -26,7 +28,7 @@ function makeBoard(y, x) {
 	for (let y = 0; y < HEIGHT; y++) {
 		board.push(new Array());
 		for (let x = 0; x < WIDTH; x++) {
-			board[y].push("undefined");
+			board[y].push(undefined);
 		}
 	}
 }
@@ -80,7 +82,7 @@ function findSpotForCol(x) {
 	for (let y = HEIGHT -1; y >= 0; y--) {
 		console.log('1:', y);
 		console.log('2: ', board[y][x])
-		if (board[y][x] === 'undefined') {
+		if (board[y][x] === undefined) {
 			return y;
 		}
 	}
@@ -106,12 +108,19 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 // Message function to make an alert
 function endGame(msg) {
-	alert(msg);
+	gameIsRunning = false;
+	////settimeout
+	setTimeout(() => {
+		alert(msg);
+	}, 200);
 }
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
+	if(gameIsRunning === false)
+		return;
+
 	// get x from ID of clicked cell
 	const x = +evt.target.id;
 
@@ -143,7 +152,7 @@ function handleClick(evt) {
 			// Loops through the column
 			for (let x = 0; x < board[y].length; x++) {
 				// Checks to see if the row/column value is undefined
-				if (board[y][x] === 'undefined'){
+				if (board[y][x] === undefined){
 					// If you find a false, exit the function, because the game is not a tie, and the game will continue
 					return false;
 				}
